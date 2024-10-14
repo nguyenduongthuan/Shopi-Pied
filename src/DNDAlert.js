@@ -1,10 +1,3 @@
-/*
- *  DNDAlert.js
- *  Simple JavaScript library alert for web developers.
- *
- *  License: MIT (c) 2022
- *  Author: İsmail Döndü
- */
 
 class Context {
   constructor(props = {}) {
