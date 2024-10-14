@@ -1,4 +1,3 @@
-
 class Context {
   constructor(props = {}) {
     this.CONTEXT_QUERY_NAME = {
@@ -994,3 +993,4 @@ class DNDAlert extends Context {
   }
 
 }
+//
