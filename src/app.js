@@ -496,7 +496,7 @@ document.querySelector("form").addEventListener("submit", (event) => {
         }, "error-input"),
         //Tải ảnh lên
         isValid({
-            value: uploadImage, 
+            value: uploadImage,
             funcs: [isRequired],
             parentNode: mediaNode.parentElement.parentElement,
             controlNode: [mediaNode.parentElement],
@@ -514,7 +514,12 @@ document.querySelector("form").addEventListener("submit", (event) => {
 
     if (isValidForm) {
         // Chuyển ảnh sang Base64 và lưu sản phẩm vào localStorage
-        getBase64(uploadedImage, (base64Data) => {
+        console.log(uploadImage);
+        console.log(uploadImage instanceof Blob);  // Kiểm tra có phải là Blob không
+        console.log(uploadImage.type);  // Kiểm tra MIME type của Blob
+        const newBlob = new Blob([uploadImage], { type: uploadImage.type });
+        getBase64(newBlob, (base64Data) => {
+            // Code xử lý tiếp theo
             const newProduct = new Product(nameNode.value, priceNode.value, quantityNode.value, base64Data, descriptionNode.value);
 
             // Lưu sản phẩm vào localStorage
@@ -531,6 +536,23 @@ document.querySelector("form").addEventListener("submit", (event) => {
             // Xóa file tạm sau khi lưu
             uploadedImage = null;
         });
+        // getBase64(uploadedImage, (base64Data) => {
+        //     const newProduct = new Product(nameNode.value, priceNode.value, quantityNode.value, base64Data, descriptionNode.value);
+
+        //     // Lưu sản phẩm vào localStorage
+        //     const store = new Store();
+        //     store.add(newProduct);
+
+        //     // Hiển thị thông báo thành công
+        //     createToast("success", `Product "${nameNode.value}" added successfully.`);
+
+        //     // Cập nhật giao diện
+        //     const ui = new RenderUI();
+        //     ui.add(newProduct);
+
+        //     // Xóa file tạm sau khi lưu
+        //     uploadedImage = null;
+        // });
 
     } else {
 
@@ -547,7 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let selectedProduct = null;  // Biến lưu trữ ID của sản phẩm đã chọn
 
-document.querySelector(".product-list").addEventListener("click", (event) => {
+document.querySelector(".product-list").addEventListener("click", async (event) => {
     const classEvent = event.target.classList;
     if (classEvent.contains("image-dom") || classEvent.contains("product-info") || classEvent.contains("product-name") || classEvent.contains("product-price-item") || classEvent.contains("product-price-normal") || classEvent.contains("product-price-discount")) {
         //laays id cuả product cần phải xóa
@@ -572,7 +594,14 @@ document.querySelector(".product-list").addEventListener("click", (event) => {
         imageView.style.backgroundImage = `url(${media})`;
         imageView.textContent = "";
         imageView.style.border = 0;
-        uploadImage = store.convertBase64ToBlob(media);//        
+
+        //promise
+        uploadImage = await store.convertBase64ToBlob(media);//
+
+
+
+
+
         //Mô tả
         const descriptionNode = document.querySelector("#product-description");
         descriptionNode.value = description;
