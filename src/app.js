@@ -543,10 +543,10 @@ document.querySelector("form").addEventListener("submit", (event) => {
     const products = store.getProducts();
     const isExist = products.some((product) => product.name === nameNode.value);
     if (isExist) {
-      // Sử dụng DNDAlert để hiển thị thông báo xác nhận xóa sản phẩm
+      // Sử dụng DNDAlert để hiển thị thông báo xác nhận
       const Alert = new DNDAlert({
-        title: "Product already exists",
-        message: `<p style="font-size: 16px;">Are you "?</p>`,
+        title: "Product existed",
+        message: `<p style="font-size: 16px;">Product "${nameNode.value}" already exists. Do you want to add it again?</p>`,
         type: "warning",
         html: true,
         buttons: [
@@ -554,23 +554,70 @@ document.querySelector("form").addEventListener("submit", (event) => {
             text: "Yes",
             class: "custom-yes-btn", // Thêm class Bootstrap nếu muốn
             onClick: (bag) => {
-              // Thực hiện xóa sản phẩm khỏi localStorage
-              let store = new Store();
-              store.remove(id);
+              //xử lý logic khi người dùng thêm lại sản phẩm (selectProduct !== null)
+              if (selectedProduct !== null) {
+                // Chuyển ảnh sang Base64 và lưu sản phẩm vào localStorage
+                //Việc dữ liệu đã qua nhiều bước xử lý, nên bị mất một số thuộc tính định dạng của Blob => ko còn tuowng thích với FileReader
+                //=> cần chuyển về Blob mới
+                const newBlob = new Blob([uploadImage], {
+                  type: uploadImage.type,
+                });
+                getBase64(newBlob, (base64Data) => {
+                  // Code xử lý tiếp theo
+                  const newProduct = new Product(
+                    nameNode.value,
+                    priceNode.value,
+                    quantityNode.value,
+                    base64Data,
+                    descriptionNode.value
+                  );
+                  // Lưu sản phẩm vào localStorage
+                  const store = new Store();
+                  store.add(newProduct);
+                  // Hiển thị thông báo thành công
+                  createToast(
+                    "success",
+                    `Product "${nameNode.value}" added again successfully.`
+                  );
+                  // Cập nhật giao diện
+                  const ui = new RenderUI();
+                  ui.add(newProduct);
 
-              // //xóa ui-làm đỡ còn cải thiện
-              // let ui = new RenderUI();
-              // ui.renderAll();
-              selectedProduct[1].target.closest(".product-item").remove();
+                  // Xóa file tạm sau khi lưu
+                  uploadedImage = null;
+                });
+              } else {
+                //Xử lý logic khi người dùng thêm mới sản phẩm
+                //lưu vào localStorage và hiển thị lên ui
+                // Chuyển ảnh từ blob sang Base64 và lưu sản phẩm vào localStorage
 
-              // Xóa các trường nhập liệu
-              clearInputField();
+                getBase64(uploadedImage, (base64Data) => {
+                  // Code xử lý tiếp theo
+                  const newProduct = new Product(
+                    nameNode.value,
+                    priceNode.value,
+                    quantityNode.value,
+                    base64Data,
+                    descriptionNode.value
+                  );
+                  // Lưu sản phẩm vào localStorage
+                  const store = new Store();
+                  store.add(newProduct);
+                  // Hiển thị thông báo thành công
+                  createToast(
+                    "success",
+                    `Product "${nameNode.value}" added again successfully.`
+                  );
+                  // Cập nhật giao diện
+                  const ui = new RenderUI();
+                  ui.add(newProduct);
 
-              createToast("success", `"${name}" deleted successfully`);
+                  // Xóa file tạm sau khi lưu
+                  uploadedImage = null;
+                });
+              }
+
               bag.CLOSE_MODAL(); // Đóng modal
-
-              // Reset lại biến lưu sản phẩm
-              selectedProduct = null;
             },
           },
           {
@@ -599,38 +646,6 @@ document.querySelector("form").addEventListener("submit", (event) => {
         animationStatus: true,
         closeIcon: true,
         sourceControlWarning: true,
-      });
-    }
-
-    //xử lý logic khi người dùng thêm lại sản phẩm (selectProduct !== null)
-    if (selectedProduct !== null) {
-      // Chuyển ảnh sang Base64 và lưu sản phẩm vào localStorage
-      //Việc dữ liệu đã qua nhiều bước xử lý, nên bị mất một số thuộc tính định dạng của Blob => ko còn tuowng thích với FileReader
-      //=> cần chuyển về Blob mới
-      const newBlob = new Blob([uploadImage], { type: uploadImage.type });
-      getBase64(newBlob, (base64Data) => {
-        // Code xử lý tiếp theo
-        const newProduct = new Product(
-          nameNode.value,
-          priceNode.value,
-          quantityNode.value,
-          base64Data,
-          descriptionNode.value
-        );
-        // Lưu sản phẩm vào localStorage
-        const store = new Store();
-        store.add(newProduct);
-        // Hiển thị thông báo thành công
-        createToast(
-          "success",
-          `Product "${nameNode.value}" added successfully.`
-        );
-        // Cập nhật giao diện
-        const ui = new RenderUI();
-        ui.add(newProduct);
-
-        // Xóa file tạm sau khi lưu
-        uploadedImage = null;
       });
     } else {
       //Xử lý logic khi người dùng thêm mới sản phẩm
