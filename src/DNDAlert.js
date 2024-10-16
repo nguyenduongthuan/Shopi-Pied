@@ -991,5 +991,4 @@ class DNDAlert extends Context {
       element.classList.add(className);
     });
   }
-
 }

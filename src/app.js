@@ -866,3 +866,24 @@ document
       });
     }
   });
+
+//Search
+document.querySelector(".search-btn").addEventListener("click", (event) => {
+  document.querySelector(".product-list").innerHTML = ""; 
+  const searchValue = document.querySelector(".search-input").value;
+  const store = new Store();
+  let products = store.getProducts();
+  products = products.filter((product) => {
+    return product.name.toLowerCase().includes(searchValue.toLowerCase());
+  });
+  products.forEach((product) => {
+    const ui = new RenderUI();
+    ui.add(product);
+  });
+  if(searchValue === ""){
+  }else if(products.length){
+    createToast("warning", "No product found!");
+  }else{
+    createToast("success", `Found ${products.length} products matching your search keyword "${searchValue}"!`);
+  }
+});
