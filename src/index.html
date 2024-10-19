@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShopiPied</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    
-    <link rel="stylesheet" href="./style.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
 
-</head>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
+  <body>
     <!-- .product-info-panel: Dùng cho khu vực chứa form nhập thông tin sản phẩm (bao gồm tên sản phẩm, giá, số lượng, mô tả).
 .product-info-input: Dùng cho các ô nhập liệu như tên sản phẩm, giá, số lượng, mô tả.
 .product-actions: Dùng cho các nút hành động như "Add", "Delete", "Clear".
@@ -27,77 +33,98 @@
 .product-discount-price: Dùng để hiển thị giá sản phẩm sau khi giảm giá (nếu có).
 .pagination: Dùng cho khu vực phân trang ở dưới danh sách sản phẩm. -->
     <div class="container">
-        <!-- form thông tin (bên trái) -->
-        <div class="product-info-panel">
-            <!-- ô nhập liệu như tên sản phẩm, giá, số lượng, mô tả. -->
-            <div class="product-info-input">
-                <!-- Title -->
-                <h1 class="title">Thông tin sản phẩm</h1>
-                <form novalidate>
-                    <!-- Tên sản phẩm -->
-                    <div class="product-name">
-                        <label for="product-name">Tên sản phẩm</label>
-                        <input type="text" id="product-name" name="product-name">
-                        <!-- <div class="error-msg">Lỗi nè cu</div> -->
-                    </div>
-                    <!-- Giá sản phẩm -->
-                    <div class="product-price">
-                        <label for="product-price">Giá sản phẩm</label>
-                        <input type="text" id="product-price" name="product-price">
-                    </div>
-                    <!-- Số lượng -->
-                    <div class="product-quantity">
-                        <label for="product-quantity">Số lượng</label>
-                        <input type="number" id="product-quantity" name="product-quantity" min="0" step="1">
-                    </div>
-                    <!-- Tải ảnh lên -->
-                    <div class="product-image">
-                        <label for="product-image" id="label-image">Tải ảnh lên</label>
-                        <!-- <label for="product-image" id="drop-area" class="error-input-none-img"></label> -->
-                        <label for="product-image" id="drop-area">
-                            <!-- <div>Tải ảnh lên</div> -->
-                            <input type="file" accept="image/*" id="product-image" name="product-image" hidden>
-                            <div id="img-view">
-                                <img src="./508-icon.png">
-                                <p>Drag and drop or click here<br> to upload image</p>
-                                <span>Upload and images from desktop</span>
-                            </div>
-                        </label>
-                        <!-- <div class="error-msg">Lỗi nè cu</div> -->
-                    </div>
-                    <!-- Mô tả -->
-                    <div class="product-description">
-                        <label for="product-description">Mô tả</label>
-                        <textarea id="product-description" name="product-description"></textarea>
-                    </div>
-                    <!-- các nút hành động như "Add", "Update", "Clear", "Delete", "Remove All" -->
-                    <div class="product-actions">
-                        <button type="submit" id="add-product">Add</button>
-                        <!-- <button type="button" id="update-product">Update</button> -->
-                        <button type="button" id="clear-product">Clear</button>
-                        <button type="button" id="delete-product">Delete</button>
-                        <button type="button" id="remove-all-product">Remove All</button>
-
-                    </div>
-                </form>
+      <!-- form thông tin (bên trái) -->
+      <div class="product-info-panel">
+        <!-- ô nhập liệu như tên sản phẩm, giá, số lượng, mô tả. -->
+        <div class="product-info-input">
+          <!-- Title -->
+          <h1 class="title">Thông tin sản phẩm</h1>
+          <form novalidate>
+            <!-- Tên sản phẩm -->
+            <div class="product-name">
+              <label for="product-name">Tên sản phẩm</label>
+              <input type="text" id="product-name" name="product-name" />
+              <!-- <div class="error-msg">Lỗi nè cu</div> -->
             </div>
+            <!-- Giá sản phẩm -->
+            <div class="product-price">
+              <label for="product-price">Giá sản phẩm</label>
+              <input type="text" id="product-price" name="product-price" />
+            </div>
+            <!-- Số lượng -->
+            <div class="product-quantity">
+              <label for="product-quantity">Số lượng</label>
+              <input
+                type="number"
+                id="product-quantity"
+                name="product-quantity"
+                min="0"
+                step="1"
+              />
+            </div>
+            <!-- Tải ảnh lên -->
+            <div class="product-image">
+              <label for="product-image" id="label-image">Tải ảnh lên</label>
+              <!-- <label for="product-image" id="drop-area" class="error-input-none-img"></label> -->
+              <label for="product-image" id="drop-area">
+                <!-- <div>Tải ảnh lên</div> -->
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="product-image"
+                  name="product-image"
+                  hidden
+                />
+                <div id="img-view">
+                  <img src="./508-icon.png" />
+                  <p>
+                    Drag and drop or click here<br />
+                    to upload image
+                  </p>
+                  <span>Upload and images from desktop</span>
+                </div>
+              </label>
+              <!-- <div class="error-msg">Lỗi nè cu</div> -->
+            </div>
+            <!-- Mô tả -->
+            <div class="product-description">
+              <label for="product-description">Mô tả</label>
+              <textarea
+                id="product-description"
+                name="product-description"
+              ></textarea>
+            </div>
+            <!-- các nút hành động như "Add", "Update", "Clear", "Delete", "Remove All" -->
+            <div class="product-actions">
+              <button type="submit" id="add-product">Add</button>
+              <!-- <button type="button" id="update-product">Update</button> -->
+              <button type="button" id="clear-product">Clear</button>
+              <button type="button" id="delete-product">Delete</button>
+              <button type="button" id="remove-all-product">Remove All</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ô search, danh sách sản phẩm (bên phải) -->
+      <div class="product-list-panel">
+        <div id="modal"></div>
+        <!-- thanh tìm kiếm sản phẩm. -->
+        <div class="search-bar">
+          <input
+            type="search"
+            class="search-input"
+            placeholder="Tìm kiếm sản phẩm..."
+          />
+          <button type="submit" class="search-btn">
+            <span class="search-icon material-symbols-outlined">search</span>
+          </button>
         </div>
 
-        <!-- ô search, danh sách sản phẩm (bên phải) -->
-        <div class="product-list-panel">
-            <div id="modal"></div>
-            <!-- thanh tìm kiếm sản phẩm. -->
-            <div class="search-bar">
-                <input type="search" class="search-input" placeholder="Tìm kiếm sản phẩm...">
-                <button type="submit" class="search-btn">
-                    <span class="search-icon material-symbols-outlined">search</span>
-                </button>
-            </div>
-
-            <!-- khu vực hiển thị danh sách các sản phẩm. -->
-            <div class="product-list">
-                <!-- sản phẩm hiển thị trong danh sách. -->
-                <!-- <div class="product-item">
+        <!-- khu vực hiển thị danh sách các sản phẩm. -->
+        <div class="product-list">
+          <!-- sản phẩm hiển thị trong danh sách. -->
+          <!-- <div class="product-item">
                     <div class="product-image-item" data-id="1">
                         <img src="./459066869_829409119302583_1828993562469540338_n.jpg" alt="product-image" >
                     </div>
@@ -109,14 +136,13 @@
                         </div>
                     </div>
                 </div> -->
-            </div>
-            <!-- Phân trang -->
         </div>
-        <ul class="notifications"></ul>
+        <!-- Phân trang -->
+      </div>
+      <ul class="notifications"></ul>
     </div>
     <script src="./app.js"></script>
     <!-- Thêm đường dẫn đến file DNDAlert -->
-    <script src="./DNDAlert.js"></script> 
-</body>
-
+    <script src="./DNDAlert.js"></script>
+  </body>
 </html>

@@ -869,7 +869,7 @@ document
 
 //Search
 document.querySelector(".search-btn").addEventListener("click", (event) => {
-  document.querySelector(".product-list").innerHTML = ""; 
+  document.querySelector(".product-list").innerHTML = "";
   const searchValue = document.querySelector(".search-input").value;
   const store = new Store();
   let products = store.getProducts();
@@ -880,10 +880,13 @@ document.querySelector(".search-btn").addEventListener("click", (event) => {
     const ui = new RenderUI();
     ui.add(product);
   });
-  if(searchValue === ""){
-  }else if(products.length){
+  if (searchValue === "") {
+  } else if (products.length) {
     createToast("warning", "No product found!");
-  }else{
-    createToast("success", `Found ${products.length} products matching your search keyword "${searchValue}"!`);
+  } else {
+    createToast(
+      "success",
+      `Found ${products.length} products matching your search keyword "${searchValue}"!`
+    );
   }
 });
